@@ -40,27 +40,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-          <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="#">
-              <i class="fa fa-fw fa-map"></i>
-              <span class="nav-link-text">
-                Basics Maps</span>
-            </a>
-          </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-            <a class="nav-link" href="<?php echo base_url() ?>assets/#">
-              <i class="fa fa-fw fa-map-marker"></i>
-              <span class="nav-link-text">
-                Maps with Marker</span>
-            </a>
-          </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-            <a class="nav-link" href="<?php echo base_url() ?>assets/#">
-              <i class="fa fa-fw fa-picture-o"></i>
-              <span class="nav-link-text">
-                Marker with images</span>
-            </a>
-          </li>
+          <?php $this->load->view('menu', $menu); ?>
         </ul>
         <ul class="navbar-nav sidenav-toggler">
           <li class="nav-item">
@@ -91,7 +71,6 @@
           </li>
         </ul>
         <!-- end top navigation -->
-
       </div>
     </nav>
     <!-- End Navigation -->
@@ -105,15 +84,16 @@
           <li class="breadcrumb-item">
             <a href="<?php echo base_url() ?>assets/#">Home</a>
           </li>
-          <li class="breadcrumb-item active">Basics Maps</li>
+          <li class="breadcrumb-item active">Marker Maps</li>
         </ol>
         <div class="card mb-3">
           <div class="card-header">
             <i class="fa fa-map"></i>
-            Basics Maps
+            Marker Maps
           </div>
           <div class="card-body">
-
+            <?php echo $map['js']; ?>
+            <?php echo $map['html']; ?>
           </div>
         </div>
 
@@ -135,6 +115,36 @@
     <a class="scroll-to-top rounded" href="<?php echo base_url() ?>assets/#page-top">
       <i class="fa fa-angle-up"></i>
     </a>
+
+    <!-- Logout Modal -->
+    <div class="modal fade" id="add-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title " >FORM ADD DATA</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form class="form-horizontal" action="<?php echo site_url('marker/simpan'); ?>" method="post" id="form-tambah-data">
+          <div class="modal-body">
+                <input type="hidden" name="latitude" id="latitude" value="" required>
+                <input type="hidden" name="langitude" id="langitude" value="" required>
+                <div class="form-group">
+                    <label for="nama" class="control-label col-md-4">Keterangan</label>
+                    <div class="col-md-12">
+                        <textarea name="keterangan" id="keterangan" rows="3" class="form-control" required></textarea>
+                    </div>
+                </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary"><i class="fa fa-upload"></i> Save</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
 
     <!-- Logout Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -170,7 +180,15 @@
 
     <!-- Custom scripts for this template -->
     <script src="<?php echo base_url() ?>assets/js/sb-admin.min.js"></script>
-
+    <script type="text/javascript">
+        var inputData = function( latitude, langitude ){
+            var form = $('#form-tambah-data');
+            $('#latitude').val( latitude );
+            $('#langitude').val( langitude );
+            $('#add-data').modal('show');
+            $('#keterangan').focus();
+        }
+    </script>
   </body>
 
 </html>
