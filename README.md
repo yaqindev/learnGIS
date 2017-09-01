@@ -2,7 +2,6 @@
 learn Googlemaps API using programming language PHP
 
 # Preview
-priview halaman admin dengan full Akses
 ![Alt text](https://raw.githubusercontent.com/yaqien378/learnGIS/master/preview.png "preview")
 
 
