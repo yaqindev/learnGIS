@@ -16,11 +16,13 @@ class Marker extends CI_Controller {
         // set marker
         $getTitikMarker = $this->lokasi->getAll();
         foreach ($getTitikMarker as $val) {
-            $latitude  = $val->latitude;
-            $longitude = $val->longitude;
-            $marker    = array();
-            $marker['position'] =  "'".$longitude. ", " .$latitude."'";
-            $marker['infowindow_content'] = "$val->keterangan";
+            // set titik
+            $latitude   = number_format( $val->latitude, 6, '.', ',' );
+            $longitude  = number_format( $val->longitude, 6, '.', ',' );
+            // set marker
+            $marker     = array();
+            $marker['position']           =  $latitude. ", " .$longitude;
+            $marker['infowindow_content'] = $val->keterangan;
             $this->googlemaps->add_marker($marker);
         }
         // set map data
@@ -47,5 +49,11 @@ class Marker extends CI_Controller {
         $this->lokasi->add( $data );
         // redirect
         redirect('marker');
+    }
+
+    public function tes()
+    {
+        $a = -7.566544512866884;
+        echo number_format( $a, 6, '.', ',' );
     }
 }
